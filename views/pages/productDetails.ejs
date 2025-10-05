@@ -1,0 +1,141 @@
+<% layout("/layouts/biolerplate") %>
+<style>
+  .row {
+    align-items: start !important;
+  }
+  .row.row-cols-md-2 {
+    align-items: flex-start !important;
+  }
+</style>
+<body>
+  <div class="py-5">
+    <div
+      class="row row-cols-lg-2 row-cols-md-2 row-cols-sm-1 justify-content-between"
+    >
+      <div
+        class="product-fluid-img-main col-md-6 col-sm-12 mb-5"
+        data-aos="fade-right"
+        data-aos-duration="2000"
+      >
+        <div class="product-fluid-img">
+          <img src="<%= product.image.url %>" class="img-fluid" alt="..." />
+        </div>
+        <div class="product-fluid-sub-img mt-4">
+          <% for(let subImage of product.subImages){ %>
+          <img src="<%= subImage %>" alt="Image" />
+          <% } %>
+        </div>
+        <div class="inner-prime-btn">
+          <div class="d-flex justify-content-between mt-5">
+            <div class="prime-btn">
+              <button class="btn btn-primary">Edit</button>
+            </div>
+            <div class="prime-btn">
+              <button class="btn btn-primary">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="varient-main col-lg-4 col-md-5 col-sm-12"
+        data-aos="fade-left"
+        data-aos-duration="2000"
+      >
+        <div class="mt-4">
+          <h4><%= product.title %></h4>
+        </div>
+        
+        <div class="mt-4 d-flex">
+          <h4>RS: <%= product.price %></h4>
+        </div>
+        <div class="select-color mt-4">
+          <label for="color" class="form-label"><b>Select Color</b></label>
+          <div class="color-main form-floating" style="color: white">
+            <% for(let color of product.colors){ %>
+            <div class="color mt-2">
+              <input
+                readonly
+                type="text"
+                class="select-color-varient"
+                value="<%= color %>"
+                style="color: transparent; background-color: <%= color %>"
+              />
+            </div>
+            <% } %>
+          </div>
+        </div>
+        <div class="select-size mt-4">
+          <label for="size" class="form-label"><b>Select Size</b></label>
+          <div
+            class="size-main form-floating d-flex flex-wrap justify-content-evenly"
+            style="color: white"
+          >
+            <% for(let size of product.sizes){ %>
+            <div class="size mt-2">
+              <input
+                readonly
+                type="text"
+                class="select-size-varient"
+                value="<%= size %>"
+              />
+            </div>
+            <% } %>
+          </div>
+
+          <div class="">
+            <label for="quantity" class="form-label mb-1 mt-4"
+              ><b>Quantity</b></label
+            >
+            <div class="quantity">
+              <button class="minus" aria-label="Decrease">&minus;</button>
+              <input
+                type="number"
+                class="input-box"
+                id="quantity"
+                value="1"
+                min="1"
+                max="10"
+              />
+              <button class="plus" aria-label="Increase">&plus;</button>
+            </div>
+          </div>
+          <div class="prime-btn mt-5 mb-4 d-flex justify-content-center">
+            <form
+              action="/products/<%= product._id %>/order"
+              method="post"
+              class="w-100"
+            >
+              <div class="selected-varient">
+                <input type="hidden" name="customer[image]" value="<%= product.image.url %>" />
+                <input type="hidden" name="customer[price]" value="<%= product.price %>" />
+              </div>
+              <button
+                class="selected-varient-btn btn btn-primary"
+                style="width: 100%; padding-block: 13px"
+              >
+                Buy Now
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div
+        class="outer-prime-btn d-flex justify-content-between align-items-start"
+      >
+        <div class="prime-btn mt-5">
+          <button class="btn btn-primary">Edit</button>
+        </div>
+        <div class="prime-btn mt-5">
+          <button class="btn btn-primary">Delete</button>
+        </div>
+      </div>
+      <div class="product-description col-lg-8 col-md-8 col-sm-12">
+        <h2 class="product-description-title mt-2">Description:</h2>
+        <p class="product-description-para">
+          <%= product.description %>
+        </p>
+      </div>
+    </div>
+  </div>
+</body>

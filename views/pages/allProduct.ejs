@@ -1,0 +1,43 @@
+<% layout("/layouts/biolerplate") %>
+
+<body>
+  <div class="prime-btn d-flex mt-auto">
+    <a href="/products/add" class="btn btn-primary">Add</a>
+  </div>
+  <div
+    class="cards row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 justify-content-evenly"
+  >
+    <% for(product of products){ %>
+    <div class="col d-flex justify-content-evenly mb-4" data-aos="zoom-in">
+      <form action="/products/<%= product._id %>/details" method="get">
+        <a
+          href="/products/<%= product._id %>/details"
+          class="text-decoration-none"
+        >
+          <div class="card h-100" style="width: 22rem">
+            <img
+              src="<%= product.image.url %>"
+              class="card-img-top"
+              alt="Product Img"
+            />
+            <div class="card-body">
+              <h5 class="card-title"><%= product.title %></h5>
+
+              <div class="prime-btn d-flex mt-auto">
+                <a
+                  href="/products/<%= product._id %>/details"
+                  class="btn btn-primary"
+                  >Buy Now</a
+                >
+                <div class="price d-flex ms-auto">
+                  <p>RS: <%= product.price %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </form>
+    </div>
+    <% } %>
+  </div>
+</body>
