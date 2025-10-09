@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../moudles/product.js");
+const Customer = require("../moudles/customer.js");
 
 
 //Show Products
@@ -35,11 +36,30 @@ router.post("/:id/order", async(req, res) => {
   res.render("pages/customerInfo.ejs", {customer});
 });
 
-
-//Order confirm popup route
-router.post("/order/confirm", (req, res) => {
+router.post("/order/confirm", async(req, res) => {
+  let customerOrder = new Customer(req.body.customer);
+  await customerOrder.save();
   res.render("pages/orderConfirm.ejs");
 });
+
+//EDIT THE PRODUCTS
+router.get("/:id/edit", async(req, res) => {
+  let {id} = req.params;
+  let product = await Product.findById(id);
+  res.render("pages/editProduct.ejs", {product});
+
+});
+
+
+//Order confirm popup route
+// router.post("/order/confirm", (req, res) => {
+//   res.render("pages/orderConfirm.ejs");
+// });
+
+
+
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<< CUSTOMER ROUTE START>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 
 
 

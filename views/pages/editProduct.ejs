@@ -1,0 +1,186 @@
+<% layout("/layouts/biolerplate") %>
+
+<body>
+  <div class="row justify-content-center">
+    <div
+      class="addproduct-form col-sm-12 col-md-10 col-lg-7 my-5"
+      data-aos="zoom-in"
+      data-aos-duration="3000"
+    >
+      <div class="d-flex justify-content-center align-items-center">
+        <h3 style="color: white">Add Product</h3>
+      </div>
+
+      <!-- form to add product -->
+
+      <form action="/products" method="post">
+        <div class="row">
+          <div class="mb-4">
+            <label for="title" class="form-label">Product Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              placeholder="Product Name"
+              value="<%= product.title %>"
+              name="product[title]"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              class="form-control"
+              id="description"
+              rows="5"
+              placeholder="Write Desription"
+              name="product[description]"
+            ><%= product.description %></textarea>
+          </div>
+          <div class="mb-4">
+            <label for="url" class="form-label">Paste Main Img Url</label>
+            <input
+              type="text"
+              class="form-control"
+              id="url"
+              placeholder="Pase Img Url"
+              value="<%= product.image.url %>"
+              name="product[image][url]"
+            />
+          </div>
+          <div class="mb-2 d-flex">
+            <div class="w-100">
+              <label for="suburl" class="form-label">Paste Sub Img Url</label>
+              <input
+                type="text"
+                class="subImgUrl form-control"
+                id="suburl"
+                placeholder="Pase Img Url"
+              />
+            </div>
+            <div class="prime-btn mx-2 d-flex" style="margin-top: 6.3%">
+              <button
+                type="button"
+                class="sub-img-btn btn btn-primary p-1"
+                style="font-size: 14px"
+              >
+                Add
+              </button>
+              <button
+                type="button"
+                class="sub-img-delete-btn btn btn-primary p-1 ms-2"
+                style="font-size: 14px"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+          <div class="sub-img-container d-flex flex-wrap justify-content-between">
+
+          </div>
+
+          <div class="mb-4">
+            <label for="price" class="form-label mt-3">Price</label>
+            <input
+              type="number"
+              class="form-control"
+              id="price"
+              placeholder="Price"
+              value="<%= product.price %>"
+              name="product[price]"
+            />
+          </div>
+          <label for="category" class="form-label">Category</label>
+          <div class="form-floating" style="color: white">
+            <select
+              class="form-select"
+              id="category"
+              name="product[category]"
+              aria-label="Floating label select example"
+            >
+              <option selected><%= product.category %></option>
+              <option value="Tech">Tech</option>
+              <option value="Home">Home</option>
+              <option value="Outdoor">Outdoor</option>
+            </select>
+
+            <!-- <label for="floatingSelect">Select Category</label> -->
+            <div class="drop-icon d-flex">
+              <i class="fa-solid fa-angle-down" style="color: #dedede"></i>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="select-colors mb-4">
+                <div class="w-100">
+                  <label for="color" class="form-label">Add Colors</label>
+                  <input
+                    type="color"
+                    class="color-input form-control"
+                    id="color"
+                    placeholder="Pase Img Url"
+                  />
+                </div>
+                <div class="prime-btn mx-2" style="margin-top: 13%">
+                  <button
+                    type="button"
+                    class="color-btn btn btn-primary p-1"
+                    style="font-size: 14px"
+                  >
+                    Add
+                  </button>
+                </div>
+                <div class="prime-btn" style="margin-top: 13%">
+                  <button
+                    type="button"
+                    class="delete-btn btn btn-primary p-1"
+                    style="font-size: 14px"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+              <div class="color-container"></div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="select-sizes mb-4">
+                <div class="w-100">
+                  <label for="color" class="form-label">Add Size</label>
+                  <input
+                    type="text"
+                    class="size-input form-control"
+                    id="size"
+                    placeholder="Pase Img Url"
+                  />
+                </div>
+                <div class="prime-btn mx-2" style="margin-top: 13%">
+                  <button
+                    type="button"
+                    class="size-btn btn btn-primary p-1"
+                    style="font-size: 14px"
+                  >
+                    Add
+                  </button>
+                </div>
+                <div class="prime-btn" style="margin-top: 13%">
+                  <button
+                    type="button"
+                    class="size-delete-btn btn btn-primary p-1"
+                    style="font-size: 14px"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+              <div class="size-container"></div>
+            </div>
+          </div>
+          <div class="prime-btn mt-5 d-flex justify-content-center">
+            <button class="btn btn-primary">Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>

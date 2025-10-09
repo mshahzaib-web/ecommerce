@@ -46,19 +46,19 @@
       <form action="/products/order/confirm" method="post" class="row g-3">
         <div class="col-12">
           <label for="inputFirstName" class="form-label">First Name</label>
-          <input type="text" class="form-control" id="inputFirstName" />
+          <input type="text" class="form-control" name="customer[firstName]" id="inputFirstName" />
         </div>
         <div class="col-12">
           <label for="inputLastName" class="form-label">Last Name</label>
-          <input type="text" class="form-control" id="inputLastName" />
+          <input type="text" class="form-control" name="customer[lastName]" id="inputLastName" />
         </div>
         <div class="col-12">
           <label for="inputEmail4" class="form-label">Email</label>
-          <input type="email" class="form-control" id="inputEmail4" />
+          <input type="email" class="form-control" name="customer[email]" id="inputEmail4" />
         </div>
         <div class="col-12">
           <label for="inputNumber" class="form-label">Phone No</label>
-          <input type="text" class="form-control" id="inputNumber" />
+          <input type="text" class="form-control" name="customer[phone]" id="inputNumber" />
         </div>
         <div class="col-12">
           <label for="inputAddress" class="form-label">Address</label>
@@ -67,6 +67,7 @@
             class="form-control"
             id="inputAddress"
             placeholder="1234 Main St"
+            name="customer[address1]"
           />
         </div>
         <div class="col-12">
@@ -76,26 +77,27 @@
             class="form-control"
             id="inputAddress2"
             placeholder="Apartment, studio, or floor"
+            name="customer[address2]"
           />
         </div>
         <div class="col-12">
           <label for="inputCity" class="form-label">City</label>
-          <input type="text" class="form-control" id="inputCity" />
+          <input type="text" class="form-control" name="customer[city]" id="inputCity" />
         </div>
         <div class="col-12">
           <label for="inputState" class="form-label">State</label>
-          <input type="text" class="form-control" id="inputState" />
+          <input type="text" class="form-control" name="customer[state]" id="inputState" />
         </div>
         <div class="col-12">
           <label for="inputCountry" class="form-label">Country</label>
-          <input type="text" class="form-control" id="inputCountry" />
+          <input type="text" class="form-control" name="customer[country]" id="inputCountry" />
         </div>
 
-        <input type="hidden" value="<%= customer.image %>">
-        <input type="hidden" value="<%= customer.color %>">
-        <input type="hidden" value="<%= customer.size %>">
-        <input type="hidden" value="<%= customer.quantity %>">
-        <input type="hidden" value="<%= customer.price * customer.quantity %>">
+        <input type="hidden" name="customer[image][url]" value="<%= customer.image %>">
+        <input type="hidden" name="customer[color]" value="<%= customer.color %>">
+        <input type="hidden" name="customer[size]" value="<%= customer.size %>">
+        <input type="hidden" name="customer[quantity]" value="<%= customer.quantity %>">
+        <input type="hidden" name="customer[price]" value="<%= customer.price * customer.quantity %>">
 
         <div class="prime-btn mt-5 d-flex justify-content-center">
           <button class="btn btn-primary">Place Order</button>
