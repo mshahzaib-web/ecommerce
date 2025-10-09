@@ -27,9 +27,11 @@
         </div>
         <div class="inner-prime-btn">
           <div class="d-flex justify-content-between mt-5">
-            <div class="prime-btn">
+            <form action="/products/<%= product._id %>/edit" method="get">
+              <div class="prime-btn">
               <button class="btn btn-primary">Edit</button>
             </div>
+            </form>
             <div class="prime-btn">
               <button class="btn btn-primary">Delete</button>
             </div>
