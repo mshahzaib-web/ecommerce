@@ -2,14 +2,17 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
+var methodOverride = require('method-override')
 const path = require("path");
 const Product = require("./moudles/product.js");
+const expressError = require("./utility/expressError.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
+app.use(methodOverride('_method'))
 
 main()
   .then((res) => {
@@ -17,7 +20,7 @@ main()
   })
   .catch((err) => console.log(err));
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/ecommercelocal");
+  await mongoose.connect("mongodb://127.0.0.1:27017/ecommerce");
 }
 
 const product = require("./routes/product.js");
@@ -51,6 +54,16 @@ app.get("/", (req, res) => {
 //     res.send(err);
 //   }
 // });
+
+app.use((req, res, next) => {
+next(new expressError(404, "Page not found:"));
+});
+
+app.use((err, req, res, next) =>{
+  let {status = 500, message = "Something went wrong"} = err;
+  res.status(status).send(err.message);
+});
+
 
 app.listen(3000, () => {
   console.log("Port is running on 3000");

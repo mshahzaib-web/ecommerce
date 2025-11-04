@@ -32,9 +32,11 @@
               <button class="btn btn-primary">Edit</button>
             </div>
             </form>
-            <div class="prime-btn">
+            <form action="/products/<%= product._id %>/delete?_method=DELETE" method="POST">
+              <div class="prime-btn">
               <button class="btn btn-primary">Delete</button>
             </div>
+            </form>
           </div>
         </div>
       </div>

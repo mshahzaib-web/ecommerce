@@ -13,7 +13,7 @@
 
       <!-- form to add product -->
 
-      <form action="/products" method="post">
+      <form class="needs-validation" action="/products" method="post">
         <div class="row">
           <div class="mb-4">
             <label for="title" class="form-label">Product Name</label>
@@ -23,7 +23,9 @@
               id="title"
               placeholder="Product Name"
               name="product[title]"
+              required
             />
+            
           </div>
           <div class="mb-4">
             <label for="description" class="form-label">Description</label>
@@ -33,6 +35,7 @@
               rows="5"
               placeholder="Write Desription"
               name="product[description]"
+              required
             ></textarea>
           </div>
           <div class="mb-4">
@@ -43,7 +46,9 @@
               id="url"
               placeholder="Pase Img Url"
               name="product[image][url]"
+              required
             />
+           
           </div>
           <div class="mb-2 d-flex">
             <div class="w-100">
@@ -53,6 +58,7 @@
                 class="subImgUrl form-control"
                 id="suburl"
                 placeholder="Pase Img Url"
+                
               />
             </div>
             <div class="prime-btn mx-2 d-flex" style="margin-top: 6.3%">
@@ -72,9 +78,9 @@
               </button>
             </div>
           </div>
-          <div class="sub-img-container d-flex flex-wrap justify-content-between">
-
-          </div>
+          <div
+            class="sub-img-container d-flex flex-wrap justify-content-between"
+          ></div>
 
           <div class="mb-4">
             <label for="price" class="form-label mt-3">Price</label>
@@ -84,6 +90,7 @@
               id="price"
               placeholder="Price"
               name="product[price]"
+              required
             />
           </div>
           <label for="category" class="form-label">Category</label>
@@ -93,6 +100,7 @@
               id="category"
               name="product[category]"
               aria-label="Floating label select example"
+              required
             >
               <option selected>Open this select menu</option>
               <option value="Tech">Tech</option>
