@@ -1,10 +1,22 @@
 // ================== COLORS ==================
+let editColorBoxs = document.querySelectorAll(".edit-color-box");
 let colorInput = document.querySelector(".color-input");
 let colorBtn = document.querySelector(".color-btn");
 let colorContainer = document.querySelector(".color-container");
 let deleteBtn = document.querySelector(".delete-btn");
 
 let selectedBox = null;
+let editSelectedBox = null;
+
+for (let editColorBox of editColorBoxs) {
+  editColorBox.addEventListener("click", (e) => {
+    if (editSelectedBox) {
+      editSelectedBox.classList.remove("selected");
+    }
+    editSelectedBox = editColorBox;
+    editSelectedBox.classList.add("selected");
+  });
+}
 
 if (colorBtn && colorInput && colorContainer && deleteBtn) {
   // Add new color
@@ -57,6 +69,8 @@ if (colorBtn && colorInput && colorContainer && deleteBtn) {
       console.log("Removed color:", removedColor);
       selectedBox.remove();
       selectedBox = null;
+    } else if (editSelectedBox) {
+      editSelectedBox.remove();
     } else {
       alert("Please select a color first");
     }
@@ -64,12 +78,27 @@ if (colorBtn && colorInput && colorContainer && deleteBtn) {
 }
 
 // ================== SIZES ==================
+let editSizeBoxs = document.querySelectorAll(".edit-size-box");
 let sizeInput = document.querySelector(".size-input");
 let sizeBtn = document.querySelector(".size-btn");
 let sizeContainer = document.querySelector(".size-container");
 let sizeDeleteBtn = document.querySelector(".size-delete-btn");
 
 let selectedBoxs = null;
+let editSelectedSizeBox = null;
+
+for (let editSizeBox of editSizeBoxs) {
+  editSizeBox.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    if (editSelectedSizeBox) {
+      editSelectedSizeBox.classList.remove("selecteds");
+    }
+
+    editSelectedSizeBox = editSizeBox;
+    editSelectedSizeBox.classList.add("selecteds");
+  });
+}
 
 if (sizeBtn && sizeInput && sizeContainer && sizeDeleteBtn) {
   sizeBtn.addEventListener("click", (e) => {
@@ -114,6 +143,9 @@ if (sizeBtn && sizeInput && sizeContainer && sizeDeleteBtn) {
       }
       selectedBoxs.remove();
       selectedBoxs = null;
+    } else if (editSelectedSizeBox) {
+      editSelectedSizeBox.remove();
+      editSelectedSizeBox = null;
     } else {
       alert("Please select a size first");
     }
@@ -121,6 +153,7 @@ if (sizeBtn && sizeInput && sizeContainer && sizeDeleteBtn) {
 }
 
 // ================== SUB IMAGES ==================
+let editSubImgInputs = document.querySelectorAll(".edit-sub-img-input");
 let subImgBtn = document.querySelector(".sub-img-btn");
 let subImgContainer = document.querySelector(".sub-img-container");
 let subImgUrl = document.querySelector(".subImgUrl");
@@ -129,6 +162,28 @@ let click = 0;
 
 let subImgValue = "";
 let selectInput = null;
+let selectedInput = null;
+
+// when click on an existing input
+for (let editSubImgInput of editSubImgInputs) {
+  editSubImgInput.addEventListener("click", (e) => {
+    e.preventDefault();
+    selectedInput = editSubImgInput; // store the selected one
+    selectInput = "select";
+  });
+}
+
+// when click on delete button
+// subImgInputDeleteBtn.addEventListener("click", (e) => {
+//   e.preventDefault();
+
+//   if (selectedInput) {
+//     selectedInput.remove(); // remove only the selected input
+//     selectedInput = null;   // reset selection
+//   } else {
+//     alert("Please select a field to delete");
+//   }
+// });
 
 if (subImgBtn && subImgContainer && subImgUrl && subImgInputDeleteBtn) {
   subImgBtn.addEventListener("click", (e) => {
@@ -147,7 +202,7 @@ if (subImgBtn && subImgContainer && subImgUrl && subImgInputDeleteBtn) {
       selectInput = "select";
     });
     click++;
-    if(click >=5){
+    if (click >= 5) {
       subImgBtn.style.display = "none";
     }
     subImgContainer.appendChild(subImgInputUrl);
@@ -156,23 +211,29 @@ if (subImgBtn && subImgContainer && subImgUrl && subImgInputDeleteBtn) {
 
   subImgInputDeleteBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    
+
+    if (selectedInput) {
+      selectedInput.remove(); // remove only the selected input
+      selectedInput = null; // reset selection
+    }
+
     let subImgInputs = document.querySelectorAll(".sub-img-input");
     for (let subImgInput of subImgInputs) {
       if (subImgInput.value === subImgValue) {
         subImgInput.remove();
       }
     }
+
     if (selectInput !== "select") {
       alert("Please first select a field to delete");
     }
-    if(selectInput == "select"){
-      if(click > 0){
-      click--;
-    }
+    if (selectInput == "select") {
+      if (click > 0) {
+        click--;
+      }
     }
     selectInput = null;
-    if(click<=4){
+    if (click <= 4) {
       subImgBtn.style.display = "block";
     }
   });
@@ -187,7 +248,6 @@ let colorHiddenInput = null;
 if (inputsdiv.length > 0) {
   for (let color of inputsdiv) {
     color.addEventListener("click", function () {
-
       inputsdiv.forEach((c) => (c.style.border = "none"));
 
       this.style.border = "4px solid white";
@@ -214,9 +274,8 @@ let sizeCount = 0;
 if (inputssize.length > 0) {
   for (let size of inputssize) {
     size.addEventListener("click", function () {
-
-      inputssize.forEach((s) => (s.style.boxShadow="none"));
-      inputssize.forEach((s) => (s.style.border="none"));
+      inputssize.forEach((s) => (s.style.boxShadow = "none"));
+      inputssize.forEach((s) => (s.style.border = "none"));
       this.style.boxShadow = "0px 1px 19px deepskyblue";
       this.style.border = "1px solid white";
 
@@ -224,7 +283,7 @@ if (inputssize.length > 0) {
       if (sizeCount == 1) {
         sizeHiddenInput = document.createElement("input");
         sizeHiddenInput.type = "hidden";
-        sizeHiddenInput. name = "customer[size]"
+        sizeHiddenInput.name = "customer[size]";
         sizeHiddenInput.value = this.value;
       }
       if (sizeCount > 1) {
@@ -241,12 +300,10 @@ let plusBtn = document.querySelector(".plus");
 let quantity = quantityInput.value;
 let quantityHiddenInput = null;
 
-
 if (quantityInput && minusBtn && plusBtn) {
-
   quantityHiddenInput = document.createElement("input");
   quantityHiddenInput.type = "hidden";
-  quantityHiddenInput.name = "customer[quantity]"
+  quantityHiddenInput.name = "customer[quantity]";
   quantityHiddenInput.value = quantity;
   quantityHiddenInput.value = quantity;
   hiddenDiv.appendChild(quantityHiddenInput);
@@ -258,7 +315,6 @@ if (quantityInput && minusBtn && plusBtn) {
       quantity--;
       quantityHiddenInput.value = quantity;
       quantityInput.value = quantity;
-
     }
   });
 
