@@ -2,6 +2,18 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../moudles/product.js");
 const Customer = require("../moudles/customer.js");
+const wrapAsync = require("../utility/wrapAsync.js");
+const {joiProductSchema} = require("../joiSchema.js");
+
+
+const joiProductValidation = (req, res, next) => {
+  let {error} = joiProductSchema.validate(req.body);
+  if(error){
+    throw new expressError(400, error)
+  }else{
+    next();
+  }
+};
 
 
 //Show Products
@@ -11,18 +23,19 @@ router.get("/", async(req, res) => {
 });
 
 //Add Product Route
-router.get("/add", (req, res) => {
+router.get("/add",(req, res) => {
   res.render("pages/addProduct.ejs");
 });
 
-router.post("/", async(req, res) => {
+router.post("/",wrapAsync( async(req, res, next) => {
   let newProduct = new Product(req.body.product);
-  await newProduct.save();
-  res.redirect("/products");
+  // await newProduct.save();
+  // res.redirect("/products");
+  res.send(newProduct);
   
   
     
-});
+}));
 
 //Show Product Details
 router.get("/:id/details", async(req, res) => {
